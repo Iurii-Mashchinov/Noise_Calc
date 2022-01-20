@@ -1,0 +1,63 @@
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+
+class Ui_Noisssse(object):
+    def setupUi(self, Noisssse):
+        Noisssse.setObjectName("Noisssse")
+        Noisssse.resize(507, 204)
+        self.centralwidget = QtWidgets.QWidget(Noisssse)
+        self.centralwidget.setObjectName("centralwidget")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(130, 10, 251, 16))
+        self.label.setObjectName("label")
+        self.Calc = QtWidgets.QPushButton(self.centralwidget)
+        self.Calc.setGeometry(QtCore.QRect(30, 70, 91, 41))
+        self.Calc.setObjectName("Calc")
+        self.Restart = QtWidgets.QPushButton(self.centralwidget)
+        self.Restart.setGeometry(QtCore.QRect(30, 120, 91, 41))
+        self.Restart.setObjectName("Restart")
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setGeometry(QtCore.QRect(370, 90, 31, 16))
+        self.label_2.setObjectName("label_2")
+        self.label_3 = QtWidgets.QLabel(self.centralwidget)
+        self.label_3.setGeometry(QtCore.QRect(260, 140, 131, 20))
+        self.label_3.setObjectName("label_3")
+        self.LcOut = QtWidgets.QTextEdit(self.centralwidget)
+        self.LcOut.setGeometry(QtCore.QRect(410, 80, 71, 31))
+        self.LcOut.setObjectName("LcOut")
+        self.DL_Out = QtWidgets.QTextEdit(self.centralwidget)
+        self.DL_Out.setGeometry(QtCore.QRect(410, 130, 71, 31))
+        self.DL_Out.setObjectName("DL_Out")
+        self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit.setGeometry(QtCore.QRect(30, 30, 451, 31))
+        self.lineEdit.setObjectName("lineEdit")
+        Noisssse.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(Noisssse)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 507, 22))
+        self.menubar.setObjectName("menubar")
+        Noisssse.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(Noisssse)
+        self.statusbar.setObjectName("statusbar")
+        Noisssse.setStatusBar(self.statusbar)
+
+        self.retranslateUi(Noisssse)
+        QtCore.QMetaObject.connectSlotsByName(Noisssse)
+
+    def retranslateUi(self, Noisssse):
+        _translate = QtCore.QCoreApplication.translate
+        Noisssse.setWindowTitle(_translate("Noisssse", "Noise Calculator"))
+        self.label.setText(_translate("Noisssse", "Input noise levels by SPACE - (37 36.6 38 ....etc)"))
+        self.Calc.setText(_translate("Noisssse", "Calculate "))
+        self.Restart.setText(_translate("Noisssse", "Restart"))
+        self.label_2.setText(_translate("Noisssse", "Lc = "))
+        self.label_3.setText(_translate("Noisssse", "Declaration noise level = "))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Noisssse = QtWidgets.QMainWindow()
+    ui = Ui_Noisssse()
+    ui.setupUi(Noisssse)
+    Noisssse.show()
+    sys.exit(app.exec_())
