@@ -1,0 +1,128 @@
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QApplication
+import statistics, math, sys
+import os
+import time
+from N_CGUI_3 import Ui_Noisssse
+
+class Noisssse(QtWidgets.QMainWindow):
+	def __init__(self):
+		super(Noisssse, self).__init__()
+		self.ui = Ui_Noisssse()
+		self.ui.setupUi(self)
+		self.ui.Calc.clicked.connect(self.calculate)
+		self.ui.Restart.clicked.connect(self.clearall)
+		self.value_list=[]
+
+	def clearall(self):
+		self.ui.LcOut.clear()
+		self.ui.DL_Out.clear()
+		#self.ui.Input.clear()
+		self.ui.lineEdit.clear()
+
+	def calculate(self):
+		L=self.ui.lineEdit.text()
+		# Уровни звук мощности приборов, через Space
+		# L = input('Введите Уровни звук мощности приборов, через Space (Example: 36 37.7 37.5 38 36.6 35)')
+		# Devide values
+		n = L.split()
+		# N-quantity of samples
+		N = len(n)
+		# List of appliances in float
+		Float_list = [float(x) for x in n]
+		# Average noise level of appliances
+		Average = sum(Float_list) / N
+		# standard deviation of reproducibility-Qr
+		Qr = 0.7
+		if N==0 or N==None:
+			self.ui.lineEdit.setText("Not enough minerals!")
+			LcD = "Error"
+			Lc = "Error"
+
+		if N < 6:
+			self.ui.lineEdit.setText("Not enough minerals!")
+			LcD ="Error"
+			Lc ="Error"
+			#print('Not')
+		if N == 6:
+			TNS = 1.476
+			Sp0 = ((1 / (N - 1)) * (
+					(Float_list[0] - Average) ** 2 + (Float_list[1] - Average) ** 2 + (Float_list[2] - Average) ** 2 + (
+					Float_list[3] - Average) ** 2 + (Float_list[4] - Average) ** 2 + (Float_list[5] - Average) ** 2))
+			Sp1 = math.sqrt(Sp0)
+			St = math.sqrt((Qr ** 2) + (Sp1 ** 2))
+			Lc = round((Average + ((TNS * St) / math.sqrt(3))),2)
+			LcD = math.ceil(Lc)
+			#print(n, '\n', N, '\n', Average, '\n', Qr, '\n', TNS, '\n', Sp0, '\n', Sp1, '\n', St, '\n', 'Lc=', Lc, '\n',
+				  #LcD)
+
+		if N == 7:
+			TNS = 1.44
+			Sp0 = ((1 / (N - 1)) * (
+					(Float_list[0] - Average) ** 2 + (Float_list[1] - Average) ** 2 + (Float_list[2] - Average) ** 2 + (
+					Float_list[3] - Average) ** 2 + (Float_list[4] - Average) ** 2 + (Float_list[5] - Average) ** 2 + (
+							Float_list[6] - Average) ** 2))
+			Sp1 = math.sqrt(Sp0)
+			St = math.sqrt((Qr ** 2) + (Sp1 ** 2))
+			Lc = round((Average + ((TNS * St) / math.sqrt(3))),2)
+			LcD = math.ceil(Lc)
+			#print(n, '\n', N, '\n', Average, '\n', Qr, '\n', TNS, '\n', Sp0, '\n', Sp1, '\n', St, '\n', 'Lc=', Lc, '\n',
+				  #LcD)
+
+		if N == 8:
+			TNS = 1.415
+			Sp0 = ((1 / (N - 1)) * (
+					(Float_list[0] - Average) ** 2 + (Float_list[1] - Average) ** 2 + (Float_list[2] - Average) ** 2 + (
+					Float_list[3] - Average) ** 2 + (Float_list[4] - Average) ** 2 + (Float_list[5] - Average) ** 2 + (
+							Float_list[6] - Average) ** 2 + (Float_list[7] - Average) ** 2))
+			Sp1 = math.sqrt(Sp0)
+			St = math.sqrt((Qr ** 2) + (Sp1 ** 2))
+			Lc = round((Average + ((TNS * St) / math.sqrt(3))),2)
+			LcD = math.ceil(Lc)
+			#print(n, '\n', N, '\n', Average, '\n', Qr, '\n', TNS, '\n', Sp0, '\n', Sp1, '\n', St, '\n', 'Lc=', Lc, '\n',
+				  #LcD)
+
+		if N == 9:
+			TNS = 1.397
+			Sp0 = ((1 / (N - 1)) * (
+					(Float_list[0] - Average) ** 2 + (Float_list[1] - Average) ** 2 + (Float_list[2] - Average) ** 2 + (
+					Float_list[3] - Average) ** 2 + (Float_list[4] - Average) ** 2 + (Float_list[5] - Average) ** 2 + (
+							Float_list[6] - Average) ** 2 + (Float_list[7] - Average) ** 2 + (
+							Float_list[8] - Average) ** 2))
+			Sp1 = math.sqrt(Sp0)
+			St = math.sqrt((Qr ** 2) + (Sp1 ** 2))
+			Lc = round((Average + ((TNS * St) / math.sqrt(3))),2)
+			LcD = math.ceil(Lc)
+			#print(n, '\n', N, '\n', Average, '\n', Qr, '\n', TNS, '\n', Sp0, '\n', Sp1, '\n', St, '\n', 'Lc=', Lc, '\n',
+				  #LcD)
+
+		if N == 10:
+			TNS = 1.383
+			Sp0 = ((1 / (N - 1)) * (
+					(Float_list[0] - Average) ** 2 + (Float_list[1] - Average) ** 2 + (Float_list[2] - Average) ** 2 + (
+					Float_list[3] - Average) ** 2 + (Float_list[4] - Average) ** 2 + (Float_list[5] - Average) ** 2 + (
+							Float_list[6] - Average) ** 2 + (Float_list[7] - Average) ** 2 + (
+							Float_list[8] - Average) ** 2 + (Float_list[8] - Average) ** 2))
+			Sp1 = math.sqrt(Sp0)
+			St = math.sqrt((Qr ** 2) + (Sp1 ** 2))
+			Lc = round((Average + ((TNS * St) / math.sqrt(3))),2)
+			LcD = math.ceil(Lc)
+
+			#print(n, '\n', N, '\n', Average, '\n', Qr, '\n', TNS, '\n', Sp0, '\n', Sp1, '\n', St, '\n', 'Lc=', Lc, '\n',
+				  #LcD)
+		if N > 10:
+			self.ui.lineEdit.setText("Too much values cowboy!")
+			LcD="Error"
+			Lc = "Error"
+
+		self.ui.LcOut.setText(str(Lc))
+		self.ui.DL_Out.setText(str(LcD))
+
+app = QtWidgets.QApplication([])
+application = Noisssse()
+application.show()
+
+sys.exit(app.exec())
+input('Press ENTER to exit')
+#os.system("pause")
+#input("Come as you are")
